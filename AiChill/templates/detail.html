@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+{% if plant_details %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Tanaman {{plant_details['nama']}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        
+        <div class="svg-title-container">
+            <a href="{{ url_for('index') }}" style="all: unset; display: flex; align-items: center;"> <!-- Make sure the anchor wraps around the div -->
+                <div class="svg-back">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <path d="M31.6667 19.9999H8.33334M8.33334 19.9999L20 31.6666M8.33334 19.9999L20 8.33325" stroke="black" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </a>
+            <h1>{{ plant_details['nama'] }}</h1>
+            
+        </div>
+        
+        <!-- Main Columns Section -->
+        <div class="columns">
+            
+            <!-- First Column with Images -->
+            <div class="column-30" id="column-30">
+                <!-- Slider Container for Small Screens -->
+                <div class="slider-container" id="slider-container">
+                    <!-- Image Slider -->
+                    <div class="slider">
+                        <img class="large-image" src="{{ plant_details['gambar1'] }}" alt="Image 1">
+                        <img class="large-image" src="{{ plant_details['gambar2'] }}" alt="Image 2">
+                        <img class="large-image" src="{{ plant_details['gambar3'] }}" alt="Image 3">
+                        <img class="large-image" src="{{ plant_details['gambar4'] }}" alt="Image 4">
+                        <img class="large-image" src="{{ plant_details['gambar5'] }}" alt="Image 5">
+                    </div>
+                    <!-- Slider Controls -->
+                    <button class="slider-control prev" onclick="prevSlide()">&#10094;</button>
+                    <button class="slider-control next" onclick="nextSlide()">&#10095;</button>
+                </div>
+
+                <div class="image-thumbnails-container" id="image-thumbnails-container">
+                    <!-- Large Image -->
+                    <img class="large-image" src="{{ plant_details['gambar1'] }}" alt="Large Image">
+                    <!-- Small Images -->
+                    <div class="small-images">
+                        <img class="small-image" src="{{ plant_details['gambar2'] }}" alt="Small Image 1">
+                        <img class="small-image" src="{{ plant_details['gambar3'] }}" alt="Small Image 2">
+                        <img class="small-image" src="{{ plant_details['gambar4'] }}" alt="Small Image 3">
+                        <img class="small-image" src="{{ plant_details['gambar5'] }}" alt="Small Image 4">
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Second Column with Scrollable Text -->
+            <div class="column-70" id="scrollable-column">
+                
+                <div class="text-content" id="text-content">
+
+                    
+                    <h3 style="margin: 10px 0px;">Kondisi Optimal untuk Pertumbuhan</h3>
+                    <div class="card-row">
+                        <div class="card-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path d="M35 4.99992L25 4.99992M35 11.6666L25 11.6666M35 18.3333L25 18.3333M9.16665 22.9295V7.49992C9.16665 5.19873 11.0321 3.33325 13.3333 3.33325C15.6345 3.33325 17.5 5.19873 17.5 7.49992V22.9295C19.51 24.275 20.8333 26.5662 20.8333 29.1666C20.8333 33.3087 17.4754 36.6666 13.3333 36.6666C9.19118 36.6666 5.83331 33.3087 5.83331 29.1666C5.83331 26.5662 7.15667 24.275 9.16665 22.9295ZM15 29.1666C15 30.0871 14.2538 30.8333 13.3333 30.8333C12.4128 30.8333 11.6666 30.0871 11.6666 29.1666C11.6666 28.2461 12.4128 27.4999 13.3333 27.4999C14.2538 27.4999 15 28.2461 15 29.1666Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <h3>{{ plant_details['suhu_optimal'] }}</h3>
+                            <p>Suhu Optimal</p>
+                        </div>
+                        <div class="card-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path d="M29.7964 33.4837C26.949 35.5525 23.5197 36.6668 20 36.6668C16.4804 36.6668 13.0511 35.5525 10.2036 33.4837M27.3062 5.02018C30.4696 6.5631 33.0634 9.06788 34.7158 12.1756C36.3682 15.2832 36.9943 18.8342 36.5045 22.3196M3.49571 22.3195C3.00587 18.8341 3.63201 15.2831 5.28439 12.1754C6.93677 9.06772 9.53055 6.56293 12.694 5.02002M29.1667 20.0001C29.1667 25.0627 25.0626 29.1668 20 29.1668C14.9374 29.1668 10.8334 25.0627 10.8334 20.0001C10.8334 14.9375 14.9374 10.8334 20 10.8334C25.0626 10.8334 29.1667 14.9375 29.1667 20.0001Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <h3>{{ plant_details['tanah_optimal'] }}</h3>
+                            <p>Tanah Optimal</p>
+                        </div>
+                        <div class="card-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path d="M30.271 3.33325H9.72911C8.95827 3.33325 8.33337 3.95814 8.33337 4.72899C8.33337 9.17106 10.098 13.4312 13.239 16.5722L15.271 18.6042C15.4728 18.806 15.5736 18.9069 15.6459 19.0037C16.0865 19.5948 16.0865 20.4051 15.6459 20.9961C15.5736 21.093 15.4728 21.1939 15.271 21.3957L13.239 23.4276C10.098 26.5686 8.33337 30.8288 8.33337 35.2708C8.33337 36.0417 8.95827 36.6666 9.72911 36.6666H30.271C31.0418 36.6666 31.6667 36.0417 31.6667 35.2708C31.6667 30.8288 29.9021 26.5686 26.7611 23.4276L24.7291 21.3957C24.5273 21.1939 24.4264 21.093 24.3542 20.9961C23.9136 20.4051 23.9136 19.5948 24.3542 19.0037C24.4264 18.9069 24.5273 18.806 24.7291 18.6042L26.7611 16.5722C29.9021 13.4312 31.6667 9.17106 31.6667 4.72899C31.6667 3.95814 31.0418 3.33325 30.271 3.33325Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <h3>{{ plant_details['waktu_tumbuh'] }}</h3>
+                            <p>Waktu Tumbuh</p>
+                        </div>
+                    </div>
+                    <div class="card-row-detail">
+                        <div class="card-container">
+                            <h3>Persiapan</h3>
+                            <p>{{ plant_details['persiapan'] }}</p>
+                        </div>
+                        <div class="card-container">
+                            <h3>Penanaman</h3>
+                            <p>{{ plant_details['penanaman'] }}</p>
+                        </div>
+                        <div class="card-container">
+                            <h3>Perawatan</h3>
+                            <p>{{ plant_details['perawatan'] }}</p>
+                        </div>
+                        <div class="card-container">
+                            <h3>Pengendalian</h3>
+                            <p>{{ plant_details['pengendalian'] }}</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+
+            </div>
+        </div>
+        {% endif %}
+
+        
+    </div>
+
+    <script>
+        
+    document.addEventListener('DOMContentLoaded', function() {
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slider .large-image');
+
+        function showSlides(index) {
+            if (index >= slides.length) slideIndex = 0;
+            if (index < 0) slideIndex = slides.length - 1;
+
+            slides.forEach((slide, i) => {
+                slide.style.display = i === slideIndex ? 'block' : 'none';
+            });
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            showSlides(slideIndex);
+        }
+
+        function prevSlide() {
+            slideIndex--;
+            showSlides(slideIndex);
+        }
+
+        showSlides(slideIndex);
+        window.nextSlide = nextSlide;
+        window.prevSlide = prevSlide;
+    });
+    </script>
+</body>
+</html>
